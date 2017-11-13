@@ -31,7 +31,7 @@ const calculatorReducer = (state = initState, action) => {
       }
       return Object.assign({}, state, {
         mainResult: computedValue,
-        history: state.history.concat(state.currentComputation),
+        history: state.history.concat(`${state.currentComputation} = ${computedValue}`),
         error: errorPresent,
       });
     case 'CLEAR_DISPLAY':

@@ -46,20 +46,21 @@ export const monkeyModeDeactivation = () => {
 
 const chooseNextKey = (currentComputation = '') => {
   const numberChoices = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-  const operationChoices = ['+', '-', '*', '/']; // , '.'];
+  const operationChoices = ['+', '-', '*', '/', '.'];
   // TODO: FIX THE FLOATS
   const lastChar = currentComputation.charAt(currentComputation.length - 1);
   // console.log("lastChar:",lastChar);
-  if (lastChar === '' || operationChoices.indexOf(lastChar) !== -1) {
-    // The last key press was an operation, so we need to follow that up with
-    // a number.
-    // NOTE: Don't choose 0
+
+  if (lastChar === '' || operationChoices.indexOf(lastChar) !== -1 ||
+    ['.'].indexOf(lastChar) !== -1) {
+    // We need to follow that up with a number.
+    // NOTE: Don't choose 0, hence the "length - 1"
     const index = Math.floor(Math.random() * (numberChoices.length - 1));
     return numberChoices[index];
   }
   // The last key press was a number, so we could go either with a number or
   // an operation.
-  const choices = numberChoices.concat(operationChoices).concat(operationChoices);
+  const choices = numberChoices.concat(operationChoices);
   const index = Math.floor(Math.random() * choices.length);
   return choices[index];
 };
@@ -71,7 +72,7 @@ export const monkeyClickAsync = () => {
     dispatch(addOperationChar(key));
 
     if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].indexOf(key) !== -1) {
-      // We can press Go on occasions
+      // We can press Go on occasions if the last character was a number
       if (Math.random() > 0.75) {
         dispatch(goCompute());
         dispatch(clearDisplay());
@@ -86,12 +87,12 @@ export const monkeyClickAsync = () => {
 
     setTimeout(() => {
       dispatch(monkeyUnClick(key));
-    }, delay + 200);
+    }, delay + 100);
 
     if (getState().calculator.monkeyMode) {
       setTimeout(() => {
         dispatch(monkeyClickAsync());
-      }, delay + 300);
+      }, delay + 150);
     }
   };
 };
