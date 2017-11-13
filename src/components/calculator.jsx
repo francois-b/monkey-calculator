@@ -38,7 +38,7 @@ class App extends React.Component {
     return (
       <div id="calculator">
         <div id="keypad">
-          <p>Result: {this.props.calc.mainResult}</p>
+          <p>Result: {this.props.calc.error ? 'ERROR' : this.props.calc.mainResult}</p>
           <p>Current Op: {this.props.calc.currentComputation}</p>
           <div className="calc-container">
             <div className="calc-row">
