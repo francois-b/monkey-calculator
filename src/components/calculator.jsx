@@ -1,11 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { addOperationChar, goCompute, clearDisplay } from '../actions';
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.handleOperationClick = this.handleOperationClick.bind(this);
+  }
+
+  handleOperationClick(value) {
+    this.props.onOperationClick(value);
+  }
+
   render() {
     const renderButton = (keyName) => {
       return (
-        <button>
+        <button
+          onClick={() => { this.handleOperationClick(keyName); }}
+        >
           {keyName}
         </button>
       );
@@ -14,8 +28,8 @@ class App extends React.Component {
     return (
       <div id="calculator">
         <div id="keypad">
-          <p>Result: </p>
-          <p>Current Op: </p>
+          <p>Result: {this.props.calc.mainResult}</p>
+          <p>Current Op: {this.props.calc.currentComputation}</p>
           <div className="calc-container">
             <div className="calc-row">
               {renderButton('1')}
@@ -52,4 +66,32 @@ class App extends React.Component {
   }
 }
 
-export const ConnectedApp = connect()(App);
+App.propTypes = {
+  calc: PropTypes.shape().isRequired,
+  onOperationClick: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    calc: state.calculator,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onOperationClick: (char) => {
+      dispatch(addOperationChar(char));
+    },
+    onGoClick: () => {
+      dispatch(goCompute());
+    },
+    onClearClick: () => {
+      dispatch(clearDisplay());
+    },
+  };
+};
+
+export const ConnectedApp = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);
