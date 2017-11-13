@@ -9,6 +9,7 @@
 #keypad {
   border: 0px solid black;
   display: flex;
+  margin-bottom: 10px;
 }
 
 div.calc-container {

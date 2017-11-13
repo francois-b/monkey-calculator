@@ -204,12 +204,12 @@ class App extends React.Component {
 
           <div id="keypad-right">
             <div id="searchpad">
-              <div>Computation History</div>
-              <input
-                type="text"
-                value={this.state.value}
+              <TextField
+                floatingLabelText="Search"
+
                 onChange={this.handleChange}
               />
+
               <div style={{ overflowY: 'scroll', height: '100px' }}>
                 {this.renderHistory()}
               </div>
