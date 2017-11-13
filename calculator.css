@@ -27,3 +27,7 @@ button {
   padding: 10px;
   margin: 5px;
 }
+
+div.calc-container button.pressed {
+        background-color: green;
+      }

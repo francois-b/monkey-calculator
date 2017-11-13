@@ -7,6 +7,8 @@ const initState = {
   currentComputation: '',
   error: false,
   history: [],
+  keyPressed: null,
+  monkeyMode: false,
 };
 
 const calculatorReducer = (state = initState, action) => {
@@ -34,6 +36,14 @@ const calculatorReducer = (state = initState, action) => {
       });
     case 'CLEAR_DISPLAY':
       return Object.assign({}, state, { currentComputation: '', error: false });
+    case 'MONKEY_CLICK':
+      return Object.assign({}, state, { keyPressed: action.keyPressed });
+    case 'MONKEY_UNCLICK':
+      return Object.assign({}, state, { keyPressed: null });
+    case 'MONKEY_MODE_ON':
+      return Object.assign({}, state, { monkeyMode: true });
+    case 'MONKEY_MODE_OFF':
+      return Object.assign({}, state, { monkeyMode: false });
     default:
       return state;
   }

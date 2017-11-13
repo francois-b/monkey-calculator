@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { addOperationChar, goCompute, clearDisplay } from '../actions';
+import { addOperationChar, goCompute, clearDisplay, monkeyClickAsync,
+  monkeyModeActivation, monkeyModeDeactivation } from '../actions';
 
 class App extends React.Component {
   constructor() {
@@ -16,6 +17,7 @@ class App extends React.Component {
     this.renderHistory = this.renderHistory.bind(this);
     this.filterHistory = this.filterHistory.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleMonkeyClick = this.handleMonkeyClick.bind(this);
   }
 
   handleOperationClick(value) {
@@ -32,6 +34,14 @@ class App extends React.Component {
 
   handleChange(event) {
     this.setState({ searchValue: event.target.value });
+  }
+
+  handleMonkeyClick() {
+    if (this.props.calc.monkeyMode) {
+      this.props.onMonkeyModeDeactivate();
+    } else {
+      this.props.onMonkeyModeActivate();
+    }
   }
 
   filterHistory(item) {
@@ -53,10 +63,18 @@ class App extends React.Component {
   }
 
   render() {
+    const getKeyClassName = (keyName) => {
+      if (keyName === this.props.calc.keyPressed) {
+        return 'pressed';
+      }
+      return null;
+    };
+
     const renderButton = (keyName) => {
       return (
         <button
           onClick={() => { this.handleOperationClick(keyName); }}
+          className={getKeyClassName(keyName)}
         >
           {keyName}
         </button>
@@ -98,6 +116,9 @@ class App extends React.Component {
           </div>
           <button onClick={this.handleGoClick}>GO =</button>
           <button onClick={this.handleClearClick}>C</button>
+          <button onClick={this.handleMonkeyClick}>
+            Monkey Mode: {this.props.calc.monkeyMode ? 'ON' : 'OFF'}
+          </button>
         </div>
         <div id="searchpad">
           <p>Computation History</p>
@@ -118,6 +139,8 @@ App.propTypes = {
   onOperationClick: PropTypes.func.isRequired,
   onGoClick: PropTypes.func.isRequired,
   onClearClick: PropTypes.func.isRequired,
+  onMonkeyModeDeactivate: PropTypes.func.isRequired,
+  onMonkeyModeActivate: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -136,6 +159,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     onClearClick: () => {
       dispatch(clearDisplay());
+    },
+    onMonkeyModeActivate: () => {
+      dispatch(monkeyModeActivation());
+      dispatch(monkeyClickAsync());
+    },
+    onMonkeyModeDeactivate: () => {
+      dispatch(monkeyModeDeactivation());
     },
   };
 };
