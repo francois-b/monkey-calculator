@@ -1,6 +1,12 @@
+/* eslint jsx-a11y/accessible-emoji: "off" */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import FlatButton from 'material-ui/FlatButton';
+import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
+import TextField from 'material-ui/TextField';
 
 import { addOperationChar, goCompute, clearDisplay, monkeyClickAsync,
   monkeyModeActivation, monkeyModeDeactivation } from '../actions';
@@ -55,81 +61,162 @@ class App extends React.Component {
   }
 
   renderHistory() {
-    /* eslint react/no-array-index-key: "off" */
+    /* eslint react/no-array-index-key: 'off' */
     const hist = this.props.calc.history.filter(this.filterHistory);
-    return hist.map((item, i) => {
-      return <div key={i} className="history-item">{item}</div>;
+    return hist.reverse().map((item, i) => {
+      return (
+        <div
+          key={i}
+          className="history-item"
+        >
+          {item}
+        </div>
+      );
     });
   }
 
   render() {
-    const getKeyClassName = (keyName) => {
+    const getPressedStatus = (keyName) => {
       if (keyName === this.props.calc.keyPressed) {
-        return 'pressed';
+        return true;
       }
-      return null;
+      return false;
     };
 
     const renderButton = (keyName) => {
+      const isPressed = getPressedStatus(keyName);
+      const style = {
+        borderRadius: '25px',
+        backgroundColor: '#ddd',
+        minWidth: '40px',
+        margin: '5px',
+      };
+      if (isPressed) {
+        style.backgroundColor = '#FFB74D';
+      }
       return (
-        <button
+        <FlatButton
+          style={style}
           onClick={() => { this.handleOperationClick(keyName); }}
-          className={getKeyClassName(keyName)}
         >
           {keyName}
-        </button>
+        </FlatButton>
       );
     };
 
     return (
-      <div id="calculator">
-        <div id="keypad">
-          <p>Result: {this.props.calc.error ? 'ERROR' : this.props.calc.mainResult}</p>
-          <p>Current Op: {this.props.calc.currentComputation}</p>
-          <div className="calc-container">
-            <div className="calc-row">
-              {renderButton('1')}
-              {renderButton('2')}
-              {renderButton('3')}
-            </div>
-
-            <div className="calc-row">
-              {renderButton('4')}
-              {renderButton('5')}
-              {renderButton('6')}
-            </div>
-
-            <div className="calc-row">
-              {renderButton('7')}
-              {renderButton('8')}
-              {renderButton('9')}
-            </div>
-
-            <div className="calc-row">
-              {renderButton('+')}
-              {renderButton('-')}
-              {renderButton('*')}
-              {renderButton('/')}
-              {renderButton('.')}
-            </div>
-
-          </div>
-          <button onClick={this.handleGoClick}>GO =</button>
-          <button onClick={this.handleClearClick}>C</button>
-          <button onClick={this.handleMonkeyClick}>
-            Monkey Mode: {this.props.calc.monkeyMode ? 'ON' : 'OFF'}
-          </button>
-        </div>
-        <div id="searchpad">
-          <p>Computation History</p>
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
+      <Paper id="calculator">
+        <div style={{ backgroundColor: '#1976D2' }}>
+          <TextField
+            value={`${this.props.calc.currentComputation}`}
+            style={{ marginLeft: 20 }}
+            inputStyle={{ color: 'white' }}
+            underlineShow={false}
+            floatingLabelText="Current Operation"
+            floatingLabelFixed
+            floatingLabelFocusStyle={{ color: 'white' }}
+            floatingLabelShrinkStyle={{ color: 'white' }}
           />
-          {this.renderHistory()}
+          <TextField
+            value={this.props.calc.error ? 'ERROR' : this.props.calc.mainResult}
+            style={{ marginLeft: 20 }}
+            inputStyle={{ color: 'white' }}
+            underlineShow={false}
+            floatingLabelText="Result"
+            floatingLabelFixed
+            floatingLabelFocusStyle={{ color: 'white' }}
+            floatingLabelShrinkStyle={{ color: 'white' }}
+          />
+
         </div>
-      </div>
+        <Divider style={{ marginBottom: '10px' }} />
+        <div id="keypad">
+          <div id="keypad-left">
+            <div id="calc-secondary-keys">
+              <div className="calc-num-container">
+                <div className="calc-num-row">
+                  {renderButton('1')}
+                  {renderButton('2')}
+                  {renderButton('3')}
+                </div>
+
+                <div className="calc-num-row">
+                  {renderButton('4')}
+                  {renderButton('5')}
+                  {renderButton('6')}
+                </div>
+
+                <div className="calc-num-row">
+                  {renderButton('7')}
+                  {renderButton('8')}
+                  {renderButton('9')}
+                </div>
+                <div className="calc-num-row">
+                  {renderButton('0')}
+                  {renderButton('.')}
+                  <FlatButton
+                    style={{
+                      borderRadius: '25px',
+                      backgroundColor: '#ddd',
+                      minWidth: '40px',
+                      margin: '5px',
+                    }}
+                    onClick={this.handleClearClick}
+                  >
+                    c
+                  </FlatButton>
+                </div>
+              </div>
+              <div className="calc-operations-bunch">
+                {renderButton('+')}
+                {renderButton('-')}
+                {renderButton('*')}
+                {renderButton('/')}
+              </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '5px' }}>
+              <FlatButton
+                onClick={this.handleGoClick}
+                style={{
+                  width: '80px',
+                  borderRadius: '25px',
+                  backgroundColor: '#ddd',
+                  marginLeft: '5px',
+                  marginTop: '10px',
+                }}
+              >
+                =
+              </FlatButton>
+              <FlatButton
+                onClick={this.handleMonkeyClick}
+                style={{
+                  width: '80px',
+                  borderRadius: '25px',
+                  backgroundColor: '#ddd',
+                  marginLeft: '5px',
+                  marginTop: '10px',
+                }}
+              >
+                🐒: {this.props.calc.monkeyMode ? 'ON' : 'OFF'}
+              </FlatButton>
+            </div>
+          </div>
+
+          <div id="keypad-right">
+            <div id="searchpad">
+              <div>Computation History</div>
+              <input
+                type="text"
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+              <div style={{ overflowY: 'scroll', height: '100px' }}>
+                {this.renderHistory()}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Paper>
     );
   }
 }

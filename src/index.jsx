@@ -5,6 +5,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { ConnectedApp } from './components/calculator.jsx';
 import { appReducer } from './reducers';
@@ -31,8 +32,10 @@ function handleSpaceBarPress(event) {
 document.onkeydown = handleSpaceBarPress;
 
 render(
-  <Provider store={store}>
-    <ConnectedApp />
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <ConnectedApp />
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('app'),
 );
