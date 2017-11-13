@@ -8,10 +8,20 @@ class App extends React.Component {
   constructor() {
     super();
     this.handleOperationClick = this.handleOperationClick.bind(this);
+    this.handleGoClick = this.handleGoClick.bind(this);
+    this.handleClearClick = this.handleClearClick.bind(this);
   }
 
   handleOperationClick(value) {
     this.props.onOperationClick(value);
+  }
+
+  handleGoClick() {
+    this.props.onGoClick();
+  }
+
+  handleClearClick() {
+    this.props.onClearClick();
   }
 
   render() {
@@ -58,8 +68,8 @@ class App extends React.Component {
             </div>
 
           </div>
-          <button>GO =</button>
-          <button>C</button>
+          <button onClick={this.handleGoClick}>GO =</button>
+          <button onClick={this.handleClearClick}>C</button>
         </div>
       </div>
     );
@@ -69,6 +79,8 @@ class App extends React.Component {
 App.propTypes = {
   calc: PropTypes.shape().isRequired,
   onOperationClick: PropTypes.func.isRequired,
+  onGoClick: PropTypes.func.isRequired,
+  onClearClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
