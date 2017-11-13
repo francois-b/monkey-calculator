@@ -1,6 +1,9 @@
 {
   "extends": "airbnb",
-   "env": {
-        "browser": true,
-    }
+  "env": {
+    "browser": true,
+  },
+  "rules": {
+    "import/extensions": "always"
+  }
 }
