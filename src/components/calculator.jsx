@@ -7,9 +7,15 @@ import { addOperationChar, goCompute, clearDisplay } from '../actions';
 class App extends React.Component {
   constructor() {
     super();
+    this.state = {
+      searchValue: null,
+    };
     this.handleOperationClick = this.handleOperationClick.bind(this);
     this.handleGoClick = this.handleGoClick.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
+    this.renderHistory = this.renderHistory.bind(this);
+    this.filterHistory = this.filterHistory.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleOperationClick(value) {
@@ -22,6 +28,28 @@ class App extends React.Component {
 
   handleClearClick() {
     this.props.onClearClick();
+  }
+
+  handleChange(event) {
+    this.setState({ searchValue: event.target.value });
+  }
+
+  filterHistory(item) {
+    if (this.state.searchValue === null || this.state.searchValue === '') {
+      return true;
+    }
+    if (item.search(this.state.searchValue) !== -1) {
+      return true;
+    }
+    return false;
+  }
+
+  renderHistory() {
+    /* eslint react/no-array-index-key: "off" */
+    const hist = this.props.calc.history.filter(this.filterHistory);
+    return hist.map((item, i) => {
+      return <div key={i} className="history-item">{item}</div>;
+    });
   }
 
   render() {
@@ -70,6 +98,15 @@ class App extends React.Component {
           </div>
           <button onClick={this.handleGoClick}>GO =</button>
           <button onClick={this.handleClearClick}>C</button>
+        </div>
+        <div id="searchpad">
+          <p>Computation History</p>
+          <input
+            type="text"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+          {this.renderHistory()}
         </div>
       </div>
     );

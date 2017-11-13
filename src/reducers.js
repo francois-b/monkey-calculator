@@ -6,6 +6,7 @@ const initState = {
   mainResult: 0,
   currentComputation: '',
   error: false,
+  history: [],
 };
 
 const calculatorReducer = (state = initState, action) => {
@@ -28,6 +29,7 @@ const calculatorReducer = (state = initState, action) => {
       }
       return Object.assign({}, state, {
         mainResult: computedValue,
+        history: state.history.concat(state.currentComputation),
         error: errorPresent,
       });
     case 'CLEAR_DISPLAY':
