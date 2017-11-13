@@ -16,6 +16,7 @@ class App extends React.Component {
     super();
     this.state = {
       searchValue: null,
+      expanded: false,
     };
     this.handleOperationClick = this.handleOperationClick.bind(this);
     this.handleGoClick = this.handleGoClick.bind(this);
@@ -104,13 +105,40 @@ class App extends React.Component {
       );
     };
 
+    const calculatorWidth = this.state.expanded ? '600px' : '220px';
+    const calculatorflexDirection = this.state.expanded ? 'row' : 'column-reverse';
+
+    const getRightPanel = () => {
+      return (
+        <div id="keypad-right">
+          <div id="searchpad">
+            <TextField
+              floatingLabelText="Search"
+
+              onChange={this.handleChange}
+            />
+
+            <div style={{ overflowY: 'scroll', height: '100px' }}>
+              {this.renderHistory()}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
     return (
-      <Paper id="calculator">
-        <div style={{ backgroundColor: '#1976D2' }}>
+      <Paper id="calculator" style={{ width: calculatorWidth }}>
+        <div style={{
+          backgroundColor: '#1976D2',
+          display: 'flex',
+          flexDirection: calculatorflexDirection,
+        }}
+        >
           <TextField
             value={`${this.props.calc.currentComputation}`}
             style={{ marginLeft: 20 }}
             inputStyle={{ color: 'white' }}
+            hintText="---"
             underlineShow={false}
             floatingLabelText="Current Operation"
             floatingLabelFixed
@@ -200,21 +228,22 @@ class App extends React.Component {
                 🐒: {this.props.calc.monkeyMode ? 'ON' : 'OFF'}
               </FlatButton>
             </div>
+            <FlatButton
+              onClick={() => { this.setState({ expanded: !this.state.expanded }); }}
+              style={{
+                width: '130px',
+                borderRadius: '25px',
+                backgroundColor: '#f4f4f4',
+                marginLeft: '5px',
+                marginTop: '10px',
+                fontSize: '12px',
+              }}
+            >
+              toggle history view
+            </FlatButton>
           </div>
 
-          <div id="keypad-right">
-            <div id="searchpad">
-              <TextField
-                floatingLabelText="Search"
-
-                onChange={this.handleChange}
-              />
-
-              <div style={{ overflowY: 'scroll', height: '100px' }}>
-                {this.renderHistory()}
-              </div>
-            </div>
-          </div>
+          {this.state.expanded ? getRightPanel() : ''}
         </div>
       </Paper>
     );
