@@ -25,6 +25,7 @@ function handleSpaceBarPress(event) {
       store.dispatch(monkeyClickAsync());
     }
   }
+  event.preventDefault();
 }
 
 document.onkeydown = handleSpaceBarPress;
