@@ -1,0 +1,29 @@
+
+#calculator {
+  display: flex;
+  flex-direction: row;
+}
+
+#keypad {
+  border: 1px solid black;
+  width: 300px;
+}
+
+div.calc-container {
+  display: flex;
+  flex-direction: column;
+}
+
+div.calc-row {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+button {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin: 5px;
+}

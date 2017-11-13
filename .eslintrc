@@ -6,5 +6,7 @@
   "rules": {
     "import/extensions": "always",
     "import/prefer-default-export": "off",
+    "arrow-body-style": "off",
+    "react/prefer-stateless-function": "off",
   }
 }
