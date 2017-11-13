@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default () => (
+const App = () => (
   <h1>Hello</h1>
 );
+
+export const ConnectedApp = connect()(App);

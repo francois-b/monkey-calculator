@@ -4,6 +4,7 @@
     "browser": true,
   },
   "rules": {
-    "import/extensions": "always"
+    "import/extensions": "always",
+    "import/prefer-default-export": "off",
   }
 }

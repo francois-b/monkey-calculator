@@ -2,12 +2,12 @@
   "name": "monkey-calculator",
   "version": "1.0.0",
   "description": "Calculator that outputs the works of Shakespeare.",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch": "webpack --watch",
-    "lint": "eslint src/*.jsx"
+    "lint": "eslint src/**/*.jsx"
   },
   "author": "",
   "license": "ISC",
