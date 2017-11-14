@@ -1,8 +1,6 @@
-/* eslint react/prop-types: "off" */
-
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 
@@ -39,6 +37,22 @@ class App extends React.Component {
   }
 }
 
+App.propTypes = {
+  mainResult: PropTypes.number,
+  uiExpanded: PropTypes.bool,
+  error: PropTypes.bool,
+  currentComputation: PropTypes.string,
+  history: PropTypes.arrayOf(PropTypes.string),
+};
+
+App.defaultProps = {
+  mainResult: 0,
+  uiExpanded: false,
+  error: false,
+  currentComputation: '',
+  history: [],
+};
+
 const mapStateToProps = (state) => {
   return {
     mainResult: state.calculator.mainResult,
@@ -48,7 +62,6 @@ const mapStateToProps = (state) => {
     history: state.calculator.history,
   };
 };
-
 
 export const ConnectedApp = connect(
   mapStateToProps,

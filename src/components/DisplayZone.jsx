@@ -1,6 +1,5 @@
-/* eslint react/prop-types: "off" */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const DisplayZone = ({ uiExpanded, children }) => {
   const calculatorflexDirection = uiExpanded ? 'row' : 'column-reverse';
@@ -14,4 +13,16 @@ export const DisplayZone = ({ uiExpanded, children }) => {
       {children}
     </div>
   );
+};
+
+DisplayZone.propTypes = {
+  uiExpanded: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+};
+
+DisplayZone.defaultProps = {
+  uiExpanded: false,
 };

@@ -1,7 +1,8 @@
-/* eslint jsx-a11y/accessible-emoji: "off", react/prop-types: "off" */
+/* eslint jsx-a11y/accessible-emoji: "off" */
 
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 
 import { toggleUI, addOperationChar, goCompute, clearDisplay, monkeyClickAsync,
@@ -152,6 +153,22 @@ export class LeftPanel extends React.Component {
     );
   }
 }
+
+LeftPanel.propTypes = {
+  keyPressed: PropTypes.string,
+  monkeyMode: PropTypes.bool,
+  onMonkeyModeDeactivate: PropTypes.func.isRequired,
+  onMonkeyModeActivate: PropTypes.func.isRequired,
+  onOperationClick: PropTypes.func.isRequired,
+  onGoClick: PropTypes.func.isRequired,
+  onClearClick: PropTypes.func.isRequired,
+  onToggleUI: PropTypes.func.isRequired,
+};
+
+LeftPanel.defaultProps = {
+  keyPressed: null,
+  monkeyMode: false,
+};
 
 const mapStateToProps = (state) => {
   return {
