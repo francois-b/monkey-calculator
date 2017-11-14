@@ -11,18 +11,18 @@ export class ControlZone extends React.Component {
     return (
       <div style={{ display: 'flex', marginBottom: '10px' }}>
         <ConnectedLeftPanel />
-        {this.props.uiExpanded ? <RightPanel history={this.props.history} /> : ''}
+        {this.props.isUiExpanded ? <RightPanel computationHistory={this.props.computationHistory} /> : ''}
       </div>
     );
   }
 }
 
 ControlZone.propTypes = {
-  uiExpanded: PropTypes.bool,
-  history: PropTypes.arrayOf(PropTypes.string),
+  isUiExpanded: PropTypes.bool,
+  computationHistory: PropTypes.arrayOf(PropTypes.string),
 };
 
 ControlZone.defaultProps = {
-  uiExpanded: false,
-  history: [],
+  isUiExpanded: false,
+  computationHistory: [],
 };

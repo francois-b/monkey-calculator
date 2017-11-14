@@ -17,7 +17,7 @@ const rowStyle = {
 
 export class NumericKeypad extends React.Component {
   getPressedStatus(keyName) {
-    if (keyName === this.props.keyPressed) {
+    if (keyName === this.props.pressedKeyName) {
       return true;
     }
     return false;
@@ -83,11 +83,11 @@ export class NumericKeypad extends React.Component {
 }
 
 NumericKeypad.propTypes = {
-  keyPressed: PropTypes.string,
+  pressedKeyName: PropTypes.string,
   handleOperationClick: PropTypes.func.isRequired,
   handleClearClick: PropTypes.func.isRequired,
 };
 
 NumericKeypad.defaultProps = {
-  keyPressed: '',
+  pressedKeyName: '',
 };

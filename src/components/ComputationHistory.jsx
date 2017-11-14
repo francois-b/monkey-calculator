@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import shortid from 'shortid';
 
 export class ComputationHistory extends React.Component {
   constructor() {
@@ -6,14 +8,13 @@ export class ComputationHistory extends React.Component {
     this.filterHistory = this.filterHistory.bind(this);
   }
 
-  getHistory() {
-    /* eslint react/no-array-index-key: 'off', react/prop-types: 'off' */
-    const hist = this.props.history.filter(this.filterHistory);
-    return hist.reverse().map((item, i) => {
+  getcomputationHistory() {
+    const hist = this.props.computationHistory.filter(this.filterHistory);
+    return hist.reverse().map((item) => {
       return (
         <div
-          key={i}
-          className="history-item"
+          key={shortid.generate()}
+          className="computationHistory-item"
         >
           {item}
         </div>
@@ -34,8 +35,18 @@ export class ComputationHistory extends React.Component {
   render() {
     return (
       <div style={{ overflowY: 'scroll', height: '100px' }}>
-        {this.getHistory()}
+        {this.getcomputationHistory()}
       </div>
     );
   }
 }
+
+ComputationHistory.propTypes = {
+  computationHistory: PropTypes.arrayOf(PropTypes.string),
+  searchValue: PropTypes.string,
+};
+
+ComputationHistory.defaultProps = {
+  computationHistory: [],
+  searchValue: '',
+};

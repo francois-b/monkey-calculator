@@ -5,16 +5,16 @@ import { combineReducers } from 'redux';
 const initState = {
   mainResult: 0,
   currentComputation: '',
-  error: false,
-  history: [],
-  keyPressed: null,
+  hasComputationError: false,
+  computationHistory: [],
+  pressedKeyName: null,
   monkeyMode: false,
-  uiExpanded: false,
+  isUiExpanded: false,
 };
 
 const calculatorReducer = (state = initState, action) => {
   let computedValue;
-  let errorPresent;
+  let hasComputationError;
 
   switch (action.type) {
     case 'ADD_OPERATION_CHARACTER':
@@ -23,30 +23,30 @@ const calculatorReducer = (state = initState, action) => {
       });
     case 'GO_COMPUTE':
       try {
-        errorPresent = false;
+        hasComputationError = false;
         computedValue = eval(state.currentComputation);
       } catch (e) {
-        console.log('error', e);
+        console.log('Computation Error:', e);
         computedValue = 0;
-        errorPresent = true;
+        hasComputationError = true;
       }
       return Object.assign({}, state, {
         mainResult: computedValue,
-        history: state.history.concat(`${state.currentComputation} = ${computedValue}`),
-        error: errorPresent,
+        computationHistory: state.computationHistory.concat(`${state.currentComputation} = ${computedValue}`),
+        hasComputationError,
       });
     case 'CLEAR_DISPLAY':
-      return Object.assign({}, state, { currentComputation: '', error: false });
+      return Object.assign({}, state, { currentComputation: '', hasComputationError: false });
     case 'MONKEY_CLICK':
-      return Object.assign({}, state, { keyPressed: action.keyPressed });
+      return Object.assign({}, state, { pressedKeyName: action.pressedKeyName });
     case 'MONKEY_UNCLICK':
-      return Object.assign({}, state, { keyPressed: null });
+      return Object.assign({}, state, { pressedKeyName: null });
     case 'MONKEY_MODE_ON':
       return Object.assign({}, state, { monkeyMode: true });
     case 'MONKEY_MODE_OFF':
       return Object.assign({}, state, { monkeyMode: false });
     case 'TOGGLE_UI':
-      return Object.assign({}, state, { uiExpanded: !state.uiExpanded });
+      return Object.assign({}, state, { isUiExpanded: !state.isUiExpanded });
     default:
       return state;
   }

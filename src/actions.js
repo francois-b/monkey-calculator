@@ -18,17 +18,17 @@ export const clearDisplay = () => {
   };
 };
 
-export const monkeyClick = (keyPressed) => {
+export const monkeyClick = (pressedKeyName) => {
   return {
     type: 'MONKEY_CLICK',
-    keyPressed,
+    pressedKeyName,
   };
 };
 
-export const monkeyUnClick = (keyPressed) => {
+export const monkeyUnClick = (pressedKeyName) => {
   return {
     type: 'MONKEY_UNCLICK',
-    keyPressed,
+    pressedKeyName,
   };
 };
 

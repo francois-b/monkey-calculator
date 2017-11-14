@@ -10,7 +10,7 @@ import { ControlZone } from './ControlZone.jsx';
 
 class App extends React.Component {
   render() {
-    const calculatorWidth = this.props.uiExpanded ? '600px' : '220px';
+    const calculatorWidth = this.props.isUiExpanded ? '600px' : '220px';
     const calculatorStyle = {
       display: 'flex',
       flexDirection: 'column',
@@ -20,7 +20,7 @@ class App extends React.Component {
 
     return (
       <Paper id="calculator" style={calculatorStyle}>
-        <DisplayZone uiExpanded={this.props.uiExpanded}>
+        <DisplayZone isUiExpanded={this.props.isUiExpanded}>
           <DisplayField
             hintText="---"
             value={`${this.props.currentComputation}`}
@@ -28,7 +28,7 @@ class App extends React.Component {
           />
           <DisplayField
             hintText="---"
-            value={this.props.error ? 'ERROR' : this.props.mainResult}
+            value={this.props.hasComputationError ? 'ERROR' : this.props.mainResult}
             label="Result"
           />
 
@@ -36,8 +36,8 @@ class App extends React.Component {
 
         <Divider style={{ marginBottom: '10px' }} />
         <ControlZone
-          history={this.props.history}
-          uiExpanded={this.props.uiExpanded}
+          computationHistory={this.props.computationHistory}
+          isUiExpanded={this.props.isUiExpanded}
         />
       </Paper>
     );
@@ -46,27 +46,27 @@ class App extends React.Component {
 
 App.propTypes = {
   mainResult: PropTypes.number,
-  uiExpanded: PropTypes.bool,
-  error: PropTypes.bool,
+  isUiExpanded: PropTypes.bool,
+  hasComputationError: PropTypes.bool,
   currentComputation: PropTypes.string,
-  history: PropTypes.arrayOf(PropTypes.string),
+  computationHistory: PropTypes.arrayOf(PropTypes.string),
 };
 
 App.defaultProps = {
   mainResult: 0,
-  uiExpanded: false,
-  error: false,
+  isUiExpanded: false,
+  hasComputationError: false,
   currentComputation: '',
-  history: [],
+  computationHistory: [],
 };
 
 const mapStateToProps = (state) => {
   return {
     mainResult: state.calculator.mainResult,
-    uiExpanded: state.calculator.uiExpanded,
-    error: state.calculator.error,
+    isUiExpanded: state.calculator.isUiExpanded,
+    hasComputationError: state.calculator.hasComputationError,
     currentComputation: state.calculator.currentComputation,
-    history: state.calculator.history,
+    computationHistory: state.calculator.computationHistory,
   };
 };
 

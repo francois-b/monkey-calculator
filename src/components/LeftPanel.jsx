@@ -56,7 +56,7 @@ export class LeftPanel extends React.Component {
       <div style={leftPanelStyle}>
         <NumericKeypad
           handleOperationClick={this.props.onOperationClick}
-          keyPressed={this.props.keyPressed}
+          pressedKeyName={this.props.pressedKeyName}
           handleClearClick={this.props.onClearClick}
         />
 
@@ -86,7 +86,7 @@ export class LeftPanel extends React.Component {
 }
 
 LeftPanel.propTypes = {
-  keyPressed: PropTypes.string,
+  pressedKeyName: PropTypes.string,
   monkeyMode: PropTypes.bool,
   onMonkeyModeDeactivate: PropTypes.func.isRequired,
   onMonkeyModeActivate: PropTypes.func.isRequired,
@@ -97,13 +97,13 @@ LeftPanel.propTypes = {
 };
 
 LeftPanel.defaultProps = {
-  keyPressed: null,
+  pressedKeyName: null,
   monkeyMode: false,
 };
 
 const mapStateToProps = (state) => {
   return {
-    keyPressed: state.calculator.keyPressed,
+    pressedKeyName: state.calculator.pressedKeyName,
     monkeyMode: state.calculator.monkeyMode,
   };
 };

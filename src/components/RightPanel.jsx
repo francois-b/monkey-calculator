@@ -26,7 +26,7 @@ export class RightPanel extends React.Component {
             onChange={this.handleSearchChange}
           />
           <ComputationHistory
-            history={this.props.history}
+            computationHistory={this.props.computationHistory}
             searchValue={this.state.searchValue}
           />
         </div>
@@ -36,9 +36,9 @@ export class RightPanel extends React.Component {
 }
 
 RightPanel.propTypes = {
-  history: PropTypes.arrayOf(PropTypes.string),
+  computationHistory: PropTypes.arrayOf(PropTypes.string),
 };
 
 RightPanel.defaultProps = {
-  history: [],
+  computationHistory: [],
 };
