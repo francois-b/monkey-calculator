@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 
-import { DisplayField } from './DisplayField.jsx';
-import { DisplayZone } from './DisplayZone.jsx';
-import { ControlZone } from './ControlZone.jsx';
+import DisplayField from './DisplayField.jsx';
+import DisplayZone from './DisplayZone.jsx';
+import ControlZone from './ControlZone.jsx';
 
 class App extends React.Component {
   render() {
@@ -70,7 +70,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export const ConnectedApp = connect(
+const ConnectedApp = connect(
   mapStateToProps,
   null,
 )(App);
+
+export default ConnectedApp;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const DisplayZone = ({ isUiExpanded, children }) => {
+const DisplayZone = ({ isUiExpanded, children }) => {
   const calculatorflexDirection = isUiExpanded ? 'row' : 'column-reverse';
   return (
     <div style={{
@@ -26,3 +26,5 @@ DisplayZone.propTypes = {
 DisplayZone.defaultProps = {
   isUiExpanded: false,
 };
+
+export default DisplayZone;

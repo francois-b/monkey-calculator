@@ -3,7 +3,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 
-export const DisplayField = props => (
+const DisplayField = props => (
   <TextField
     value={props.value}
     style={{ marginLeft: 20 }}
@@ -16,3 +16,5 @@ export const DisplayField = props => (
     {...props}
   />
 );
+
+export default DisplayField;

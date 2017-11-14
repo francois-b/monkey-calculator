@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 
-import { ComputationHistory } from './ComputationHistory.jsx';
+import ComputationHistory from './ComputationHistory.jsx';
 
-export class RightPanel extends React.Component {
+export default class RightPanel extends React.Component {
   constructor() {
     super();
     this.state = {

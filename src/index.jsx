@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import { ConnectedApp } from './components/Calculator.jsx';
+import ConnectedApp from './components/Calculator.jsx';
 import { appReducer } from './reducers';
 import { monkeyModeActivation, monkeyModeDeactivation, monkeyMouseDownAsync } from './actions';
 

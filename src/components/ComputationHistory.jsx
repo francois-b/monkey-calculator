@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
-export class ComputationHistory extends React.Component {
+export default class ComputationHistory extends React.Component {
   constructor() {
     super();
     this.filterHistory = this.filterHistory.bind(this);

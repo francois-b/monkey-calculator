@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 import { toggleUI, addOperationChar, goCompute, clearDisplay, monkeyMouseDownAsync,
   monkeyModeActivation, monkeyModeDeactivation } from '../actions';
-import { NumericKeypad } from './NumericKeypad.jsx';
+import NumericKeypad from './NumericKeypad.jsx';
 
 const primaryButtonStyle = {
   width: '80px',
@@ -26,7 +26,7 @@ const fadedButtonStyle = {
   fontSize: '12px',
 };
 
-export class LeftPanel extends React.Component {
+class LeftPanel extends React.Component {
   constructor() {
     super();
     this.handleMonkeyClick = this.handleMonkeyClick.bind(this);
@@ -132,7 +132,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const ConnectedLeftPanel = connect(
+const ConnectedLeftPanel = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(LeftPanel);
+
+export default ConnectedLeftPanel;

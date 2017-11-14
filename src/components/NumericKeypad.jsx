@@ -15,7 +15,7 @@ const rowStyle = {
   justifyContent: 'center',
 };
 
-export class NumericKeypad extends React.Component {
+export default class NumericKeypad extends React.Component {
   getPressedStatus(keyName) {
     if (keyName === this.props.pressedKeyName) {
       return true;

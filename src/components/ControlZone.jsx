@@ -3,10 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { RightPanel } from './RightPanel.jsx';
-import { ConnectedLeftPanel } from './LeftPanel.jsx';
+import RightPanel from './RightPanel.jsx';
+import ConnectedLeftPanel from './LeftPanel.jsx';
 
-export class ControlZone extends React.Component {
+export default class ControlZone extends React.Component {
   render() {
     return (
       <div style={{ display: 'flex', marginBottom: '10px' }}>
