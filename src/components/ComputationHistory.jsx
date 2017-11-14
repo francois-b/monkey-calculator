@@ -8,7 +8,7 @@ export class ComputationHistory extends React.Component {
     this.filterHistory = this.filterHistory.bind(this);
   }
 
-  getcomputationHistory() {
+  getComputationHistory() {
     const hist = this.props.computationHistory.filter(this.filterHistory);
     return hist.reverse().map((item) => {
       return (
@@ -35,7 +35,7 @@ export class ComputationHistory extends React.Component {
   render() {
     return (
       <div style={{ overflowY: 'scroll', height: '100px' }}>
-        {this.getcomputationHistory()}
+        {this.getComputationHistory()}
       </div>
     );
   }

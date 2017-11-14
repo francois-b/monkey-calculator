@@ -8,5 +8,10 @@
     "import/prefer-default-export": "off",
     "arrow-body-style": "off",
     "react/prefer-stateless-function": "off",
-  }
+  },
+  "globals": {
+        "describe": true,
+        "it": true,
+        "expect": true,
+    }
 }
