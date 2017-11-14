@@ -17,8 +17,6 @@ div.calc-container {
 
 }
 
-.calc-num-container {}
-
 div.calc-num-row {
   border: 0px solid red;
   display: flex;

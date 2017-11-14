@@ -9,6 +9,7 @@ const initState = {
   history: [],
   keyPressed: null,
   monkeyMode: false,
+  uiExpanded: false,
 };
 
 const calculatorReducer = (state = initState, action) => {
@@ -44,6 +45,8 @@ const calculatorReducer = (state = initState, action) => {
       return Object.assign({}, state, { monkeyMode: true });
     case 'MONKEY_MODE_OFF':
       return Object.assign({}, state, { monkeyMode: false });
+    case 'TOGGLE_UI':
+      return Object.assign({}, state, { uiExpanded: !state.uiExpanded });
     default:
       return state;
   }

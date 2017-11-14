@@ -44,12 +44,16 @@ export const monkeyModeDeactivation = () => {
   };
 };
 
+export const toggleUI = () => {
+  return {
+    type: 'TOGGLE_UI',
+  };
+};
+
 const chooseNextKey = (currentComputation = '') => {
   const numberChoices = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   const operationChoices = ['+', '-', '*', '/', '.'];
-  // TODO: FIX THE FLOATS
   const lastChar = currentComputation.charAt(currentComputation.length - 1);
-  // console.log("lastChar:",lastChar);
 
   if (lastChar === '' || operationChoices.indexOf(lastChar) !== -1 ||
     ['.'].indexOf(lastChar) !== -1) {
