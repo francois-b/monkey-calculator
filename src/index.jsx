@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { ConnectedApp } from './components/Calculator.jsx';
 import { appReducer } from './reducers';
-import { monkeyModeActivation, monkeyModeDeactivation, monkeyClickAsync } from './actions';
+import { monkeyModeActivation, monkeyModeDeactivation, monkeyMouseDownAsync } from './actions';
 
 const store = createStore(
   appReducer,
@@ -23,7 +23,7 @@ function handleSpaceBarPress(event) {
       store.dispatch(monkeyModeDeactivation());
     } else {
       store.dispatch(monkeyModeActivation());
-      store.dispatch(monkeyClickAsync());
+      store.dispatch(monkeyMouseDownAsync());
     }
     event.preventDefault();
   }

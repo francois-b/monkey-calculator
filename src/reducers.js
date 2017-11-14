@@ -15,6 +15,7 @@ const initState = {
 const calculatorReducer = (state = initState, action) => {
   let computedValue;
   let hasComputationError;
+  let historyRecord;
 
   switch (action.type) {
     case 'ADD_OPERATION_CHARACTER':
@@ -30,16 +31,17 @@ const calculatorReducer = (state = initState, action) => {
         computedValue = 0;
         hasComputationError = true;
       }
+      historyRecord = `${state.currentComputation} = ${computedValue}`;
       return Object.assign({}, state, {
         mainResult: computedValue,
-        computationHistory: state.computationHistory.concat(`${state.currentComputation} = ${computedValue}`),
+        computationHistory: state.computationHistory.concat(historyRecord),
         hasComputationError,
       });
     case 'CLEAR_DISPLAY':
       return Object.assign({}, state, { currentComputation: '', hasComputationError: false });
-    case 'MONKEY_CLICK':
+    case 'MONKEY_MOUSEDOWN':
       return Object.assign({}, state, { pressedKeyName: action.pressedKeyName });
-    case 'MONKEY_UNCLICK':
+    case 'MONKEY_MOUSEUP':
       return Object.assign({}, state, { pressedKeyName: null });
     case 'MONKEY_MODE_ON':
       return Object.assign({}, state, { monkeyMode: true });

@@ -18,16 +18,16 @@ export const clearDisplay = () => {
   };
 };
 
-export const monkeyClick = (pressedKeyName) => {
+export const monkeyMouseDown = (pressedKeyName) => {
   return {
-    type: 'MONKEY_CLICK',
+    type: 'MONKEY_MOUSEDOWN',
     pressedKeyName,
   };
 };
 
-export const monkeyUnClick = (pressedKeyName) => {
+export const monkeyMouseUp = (pressedKeyName) => {
   return {
-    type: 'MONKEY_UNCLICK',
+    type: 'MONKEY_MOUSEUP',
     pressedKeyName,
   };
 };
@@ -69,7 +69,7 @@ const chooseNextKey = (currentComputation = '') => {
   return choices[index];
 };
 
-export const monkeyClickAsync = () => {
+export const monkeyMouseDownAsync = () => {
   return (dispatch, getState) => {
     const currentComp = getState().calculator.currentComputation;
     const key = chooseNextKey(currentComp);
@@ -86,16 +86,16 @@ export const monkeyClickAsync = () => {
     const delay = 0;
 
     setTimeout(() => {
-      dispatch(monkeyClick(key));
+      dispatch(monkeyMouseDown(key));
     }, delay);
 
     setTimeout(() => {
-      dispatch(monkeyUnClick(key));
+      dispatch(monkeyMouseUp(key));
     }, delay + 100);
 
     if (getState().calculator.monkeyMode) {
       setTimeout(() => {
-        dispatch(monkeyClickAsync());
+        dispatch(monkeyMouseDownAsync());
       }, delay + 150);
     }
   };

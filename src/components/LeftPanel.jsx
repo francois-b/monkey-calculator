@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 
-import { toggleUI, addOperationChar, goCompute, clearDisplay, monkeyClickAsync,
+import { toggleUI, addOperationChar, goCompute, clearDisplay, monkeyMouseDownAsync,
   monkeyModeActivation, monkeyModeDeactivation } from '../actions';
 import { NumericKeypad } from './NumericKeypad.jsx';
 
@@ -124,7 +124,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     onMonkeyModeActivate: () => {
       dispatch(monkeyModeActivation());
-      dispatch(monkeyClickAsync());
+      dispatch(monkeyMouseDownAsync());
     },
     onMonkeyModeDeactivate: () => {
       dispatch(monkeyModeDeactivation());
