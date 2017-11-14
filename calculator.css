@@ -5,8 +5,7 @@
   margin: 30px;
 }
 
-#keypad {
-  border: 0px solid black;
+#control-zone {
   display: flex;
   margin-bottom: 10px;
 }
@@ -18,7 +17,6 @@ div.calc-container {
 }
 
 div.calc-num-row {
-  border: 0px solid red;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -40,11 +38,7 @@ button {
   margin: 5px;
 }
 
-.pressed {
-  background-color: green;
-}
-
-#keypad-left {
+#left-panel {
   margin-left: 10px;
   width: 50%;
   display: flex;

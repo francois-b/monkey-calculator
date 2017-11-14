@@ -2,13 +2,16 @@
 
 import React from 'react';
 
-export const DisplayZone = ({ calculatorflexDirection, children }) => (
-  <div style={{
-    backgroundColor: '#1976D2',
-    display: 'flex',
-    flexDirection: calculatorflexDirection,
-  }}
-  >
-    {children}
-  </div>
-);
+export const DisplayZone = ({ uiExpanded, children }) => {
+  const calculatorflexDirection = uiExpanded ? 'row' : 'column-reverse';
+  return (
+    <div style={{
+      backgroundColor: '#1976D2',
+      display: 'flex',
+      flexDirection: calculatorflexDirection,
+    }}
+    >
+      {children}
+    </div>
+  );
+};

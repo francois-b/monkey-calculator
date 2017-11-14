@@ -24,11 +24,10 @@ export class RightPanel extends React.Component {
         <div id="searchpad">
           <TextField
             floatingLabelText="Search"
-
             onChange={this.handleChange}
           />
           <ComputationHistory
-            history={this.props.calc.history}
+            history={this.props.history}
             searchValue={this.state.searchValue}
           />
         </div>

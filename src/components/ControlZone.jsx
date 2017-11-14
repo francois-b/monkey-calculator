@@ -8,9 +8,9 @@ import { ConnectedLeftPanel } from './LeftPanel.jsx';
 export class ControlZone extends React.Component {
   render() {
     return (
-      <div id="keypad">
-        <ConnectedLeftPanel {...this.props} />
-        {this.props.expanded ? <RightPanel {...this.props} /> : ''}
+      <div id="control-zone">
+        <ConnectedLeftPanel />
+        {this.props.uiExpanded ? <RightPanel history={this.props.history} /> : ''}
       </div>
     );
   }

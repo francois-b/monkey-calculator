@@ -4,7 +4,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 
-import { toggleUI } from '../actions';
+import { toggleUI, addOperationChar, goCompute, clearDisplay, monkeyClickAsync,
+  monkeyModeActivation, monkeyModeDeactivation } from '../actions';
 
 const primaryButtonStyle = {
   width: '80px',
@@ -35,14 +36,14 @@ export class LeftPanel extends React.Component {
   }
 
   getPressedStatus(keyName) {
-    if (keyName === this.props.calc.keyPressed) {
+    if (keyName === this.props.keyPressed) {
       return true;
     }
     return false;
   }
 
   handleMonkeyClick() {
-    if (this.props.calc.monkeyMode) {
+    if (this.props.monkeyMode) {
       this.props.onMonkeyModeDeactivate();
     } else {
       this.props.onMonkeyModeActivate();
@@ -84,7 +85,7 @@ export class LeftPanel extends React.Component {
 
   render() {
     return (
-      <div id="keypad-left">
+      <div id="left-panel">
         <div id="calc-secondary-keys">
           <div className="calc-num-container">
             <div className="calc-num-row">
@@ -138,7 +139,7 @@ export class LeftPanel extends React.Component {
             onClick={this.handleMonkeyClick}
             style={primaryButtonStyle}
           >
-            🐒: {this.props.calc.monkeyMode ? 'ON' : 'OFF'}
+            🐒: {this.props.monkeyMode ? 'ON' : 'OFF'}
           </FlatButton>
         </div>
         <FlatButton
@@ -152,14 +153,33 @@ export class LeftPanel extends React.Component {
   }
 }
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return {
+    keyPressed: state.calculator.keyPressed,
+    monkeyMode: state.calculator.monkeyMode,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onToggleUI: () => {
       dispatch(toggleUI());
+    },
+    onOperationClick: (char) => {
+      dispatch(addOperationChar(char));
+    },
+    onGoClick: () => {
+      dispatch(goCompute());
+    },
+    onClearClick: () => {
+      dispatch(clearDisplay());
+    },
+    onMonkeyModeActivate: () => {
+      dispatch(monkeyModeActivation());
+      dispatch(monkeyClickAsync());
+    },
+    onMonkeyModeDeactivate: () => {
+      dispatch(monkeyModeDeactivation());
     },
   };
 };
