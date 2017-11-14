@@ -1,3 +1,3 @@
 # Calculator
 
-![Image of calculator](https://github.com/francois-b/monkey-calculator/raw/master/solution.gif)
+![Image of calculator](https://github.com/francois-b/monkey-calculator/blob/solution/solution.gif)
