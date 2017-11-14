@@ -9,7 +9,7 @@ import { ConnectedLeftPanel } from './LeftPanel.jsx';
 export class ControlZone extends React.Component {
   render() {
     return (
-      <div id="control-zone">
+      <div style={{ display: 'flex', marginBottom: '10px' }}>
         <ConnectedLeftPanel />
         {this.props.uiExpanded ? <RightPanel history={this.props.history} /> : ''}
       </div>

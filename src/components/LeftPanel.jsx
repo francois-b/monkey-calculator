@@ -46,8 +46,14 @@ export class LeftPanel extends React.Component {
   }
 
   render() {
+    const leftPanelStyle = {
+      marginLeft: '10px',
+      width: '50%',
+      display: 'flex',
+      flexDirection: 'column',
+    };
     return (
-      <div id="left-panel">
+      <div style={leftPanelStyle}>
         <NumericKeypad
           handleOperationClick={this.props.onOperationClick}
           keyPressed={this.props.keyPressed}

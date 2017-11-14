@@ -2,6 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 
+const buttonStyle = {
+  borderRadius: '25px',
+  backgroundColor: '#ddd',
+  minWidth: '40px',
+  margin: '5px',
+};
+
+const rowStyle = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+};
+
 export class NumericKeypad extends React.Component {
   getPressedStatus(keyName) {
     if (keyName === this.props.keyPressed) {
@@ -12,14 +25,9 @@ export class NumericKeypad extends React.Component {
 
   renderButton(keyName) {
     const isPressed = this.getPressedStatus(keyName);
-    const style = {
-      borderRadius: '25px',
-      backgroundColor: '#ddd',
-      minWidth: '40px',
-      margin: '5px',
-    };
+    let style = buttonStyle;
     if (isPressed) {
-      style.backgroundColor = '#FFB74D';
+      style = Object.assign({}, style, { backgroundColor: '#FFB74D' });
     }
     return (
       <FlatButton
@@ -33,42 +41,37 @@ export class NumericKeypad extends React.Component {
 
   render() {
     return (
-      <div id="calc-secondary-keys">
-        <div className="calc-num-container">
-          <div className="calc-num-row">
+      <div style={{ display: 'flex' }}>
+        <div>
+          <div style={rowStyle}>
             {this.renderButton('1')}
             {this.renderButton('2')}
             {this.renderButton('3')}
           </div>
 
-          <div className="calc-num-row">
+          <div style={rowStyle}>
             {this.renderButton('4')}
             {this.renderButton('5')}
             {this.renderButton('6')}
           </div>
 
-          <div className="calc-num-row">
+          <div style={rowStyle}>
             {this.renderButton('7')}
             {this.renderButton('8')}
             {this.renderButton('9')}
           </div>
-          <div className="calc-num-row">
+          <div style={rowStyle}>
             {this.renderButton('0')}
             {this.renderButton('.')}
             <FlatButton
-              style={{
-                borderRadius: '25px',
-                backgroundColor: '#ddd',
-                minWidth: '40px',
-                margin: '5px',
-              }}
+              style={buttonStyle}
               onClick={this.props.handleClearClick}
             >
               c
             </FlatButton>
           </div>
         </div>
-        <div className="calc-operations-bunch">
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           {this.renderButton('+')}
           {this.renderButton('-')}
           {this.renderButton('*')}

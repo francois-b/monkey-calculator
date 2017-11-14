@@ -11,8 +11,15 @@ import { ControlZone } from './ControlZone.jsx';
 class App extends React.Component {
   render() {
     const calculatorWidth = this.props.uiExpanded ? '600px' : '220px';
+    const calculatorStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: '30px',
+      width: calculatorWidth,
+    };
+
     return (
-      <Paper id="calculator" style={{ width: calculatorWidth }}>
+      <Paper id="calculator" style={calculatorStyle}>
         <DisplayZone uiExpanded={this.props.uiExpanded}>
           <DisplayField
             hintText="---"
