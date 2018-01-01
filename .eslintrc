@@ -1,6 +1,17 @@
 {
   "extends": "airbnb",
-   "env": {
-        "browser": true,
+  "env": {
+    "browser": true,
+  },
+  "rules": {
+    "import/extensions": "always",
+    "import/prefer-default-export": "off",
+    "arrow-body-style": "off",
+    "react/prefer-stateless-function": "off",
+  },
+  "globals": {
+        "describe": true,
+        "it": true,
+        "expect": true,
     }
 }
